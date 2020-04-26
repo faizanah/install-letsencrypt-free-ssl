@@ -16,8 +16,7 @@
 - [Setting up Let’s Encrypt SSL]
 - [Setting up Auto - Renewal Cron Job]
 - [How to Revoke a Certificate?]
-- [Qualys SSL Labs Test] 
-- [Copyright]
+- [Qualys SSL Labs Test]
 
 ##
 
@@ -207,10 +206,3 @@ You can evaluate the server encryption performance with [Qualys SSL Labs test si
 ![picture](/public/ssl_report.PNG)
 
 ![picture](/public/divider.png)
-
-### Copyright
-
-Copyright (C) [Faizan AH](https://faizanahmad.herokuapp.com) - All Rights Reserved
-
-- Unauthorized copying of this file, via any medium is strictly prohibited
-- Written by [Faizan Ahmad](https://faizanahmad.herokuapp.com), April 2020.
