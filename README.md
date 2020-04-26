@@ -1,12 +1,12 @@
 
 <p align="center">
-  <img src="./public/banner.png" alt="Install Free Let’s Encrypt SSL Cert with Nginx" width="250" />
+  <img src="./public/banner.png" alt="Install Free Let’s Encrypt SSL Cert with Nginx" width="450" />
 </p>
 
 <h1 align="center">Install Free Let’s Encrypt SSL Cert with Nginx</h1>
 
 <p align="center">
-  <img src="./public/divider.png" alt="Install Free Let’s Encrypt SSL Cert with Nginx" width="400" />
+  <img src="./public/divider.png" alt="Install Free Let’s Encrypt SSL Cert with Nginx" width="500" />
 </p>
 
 # Table of Contents
