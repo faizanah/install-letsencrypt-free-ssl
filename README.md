@@ -66,7 +66,7 @@ We can create a cert using the following command. Note that you'll need to chang
 $ /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /usr/share/nginx/html -d 'mysite.com,www.mysite.com'
 ```
 
-## Enhancing Security
+## Enhancing Security (Optional)
 
 Once you have the certificate and chain saved on the server, you can check the Nginx configuration to further tune the HTTPS connection using the new certificates.
 
@@ -87,7 +87,50 @@ Once you have the certificate and chain saved on the server, you can check the N
   ```
 
 Enable HSTS in by using the option as shown below
+```
+```
+- Diffie-Hellman Ephemeral algorithm
+  The Diffie-Hellman algorithm is a way of generating a shared secret between two parties in such a way that the secret cannot be seen by observing the communication.
 
+    Generate a strong DHE parameter using the command below.
+    ```
+    $ ssl_dhparam /etc/ssl/certs/dhparam.pem;
+
+    ```
+- Adding it all to the configuration
+    Create a new configuration file with the command below.
+    ```
+    $ sudo nano /etc/nginx/sites-enabled/mysite.com
+    ```
+    This example configuration sets up a single site listening for HTTPS connections with the added security features as explained above. 
+    * Replace `mysite.com` in the example underneath with your own domain.
+    ```
+    # HTTPS server
+    server {
+        listen 443 ssl;
+        server_name mysite.com;
+        ssl_certificate /etc/letsencrypt/live/mysite.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/mysite.com/privkey.pem;
+        ssl_session_cache shared:SSL:10m;
+        ssl_session_timeout 5m;
+        ssl_protocols TLSv1.1 TLSv1.2;
+        ssl_prefer_server_ciphers on;
+        ssl_dhparam /etc/ssl/certs/dhparam.pem;
+        ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA:ECDHE-ECDSA-AES128-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA256;
+        add_header Strict-Transport-Security "max-age=31536000; includeSubdomains";
+        location / {
+            root /usr/share/nginx/html;
+            index index.html index.htm;
+        }
+    }
+
+    # HTTP redirect
+    server {
+        listen 80;
+        server_name mysite.com;
+        return 301 https://$server_name$request_uri;
+    }
+    ```
 ##
 
 # Setting up Auto - Renewal Cron Job
