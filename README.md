@@ -117,7 +117,7 @@ The output produced by the command will be piped to a log file located at `/var/
 Your SSL certificate is now up and running and it gets renewed automatically. You don’t have to keep an eye on it.
 
 # How to Revoke a existing certificate?
-If you want to remove a existing certificate from your server it can be revoked using the below given command with the client.
+If you want to remove a existing certificate from your server it can be revoked using the below given command.
 - `mysite.com` should be replaced with your domain which certificate you want to revoke.
 
 ```
