@@ -126,6 +126,7 @@ Once you have the certificate and chain saved on the server, you can check the N
     This example configuration sets up a single site listening for HTTPS connections with the added security features as explained above. 
     
     * Replace `mysite.com` in the example underneath with your own domain.
+
     
     ```
     # HTTPS server
@@ -209,8 +210,7 @@ You can evaluate the server encryption performance with [Qualys SSL Labs test si
 
 ### Copyright
 
-Copyright (C) [Faizan AH][1] - All Rights Reserved
+Copyright (C) [Faizan AH](https://faizanahmad.herokuapp.com) - All Rights Reserved
 
 - Unauthorized copying of this file, via any medium is strictly prohibited
-- Written by Faizan Ahmad <faizanahmad.herokuapp.com>, April 2020
-[1]: https://faizanahmad.herokuapp.com
+- Written by [Faizan Ahmad](https://faizanahmad.herokuapp.com), April 2020.
