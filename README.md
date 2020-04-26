@@ -60,9 +60,9 @@ $ export LC_CTYPE="en_US.UTF-8"
 
 ##### Step 2: Creating a Let's Encrypt SSL Cert
 
-We can create a cert using the following command. Note that you'll need to change the domain name.
+We can create a cert using the following command.
 
-- `mysite.com` should be replaced with your domain
+- Note: `mysite.com` should be replaced with your domain name.
 
 ```
 $ /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /usr/share/nginx/html -d 'mysite.com,www.mysite.com'
@@ -121,13 +121,13 @@ Once you have the certificate and chain saved on the server, you can check the N
     }
     ```
 - Adding it all to the configuration
-    Create a new configuration file with the command below.
+
+    Create a configuration file with the command below.
     ```
     $ sudo nano /etc/nginx/sites-enabled/mysite.com
     ```
-    This example configuration sets up a single site listening for HTTPS connections with the added security features as explained above. 
     
-    * Replace `mysite.com` in the example underneath with your own domain.
+    - Replace `mysite.com` in the example underneath with your own domain.
 
     
     ```
@@ -150,7 +150,7 @@ Once you have the certificate and chain saved on the server, you can check the N
         }
     }
 
-    # HTTP redirect
+    # Redirect all HTTP traffic to HTTPS
     server {
         listen 80;
         server_name mysite.com;
@@ -172,8 +172,7 @@ Create this log file if it doesn’t already exist.
 $ touch /var/log/le-renew.log
 ```
 
-To enable automatic renewal of your ssl certificate, follow the following steps to create a Cron task that would handle it automatically for you.
-Run this command to open up the crontab:
+Run this command to open up the crontab to enable automatic renewal of your ssl certificates.
 
 ```
 $ sudo crontab -e
@@ -186,11 +185,10 @@ Paste following below two line in the end of cron tab.
 35 4 * * 1 /etc/init.d/nginx reload
 ```
 
-We have registered a new cron job that will execute the auto renew command every Monday at `4:30 am`, and reload Nginx at `4:35am`.
+We have registered a cron job that will execute every Monday at `4:30 am`, and reload Nginx at `4:35am`.
 The output produced by the command will be piped to a log file located at `/var/log/le-renew.log`.
 
-
-Your SSL certificate is now up and running and it gets renewed automatically. You don’t have to keep an eye on it.
+Your SSL certificate is now up and running and it gets renewed automatically.
 
 # How to Revoke a existing certificate?
 If you want to remove a existing certificate from your server it can be revoked using the below given command.
