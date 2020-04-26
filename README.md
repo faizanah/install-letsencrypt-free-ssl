@@ -30,7 +30,7 @@ Currently, the entire process of obtaining and installing a certificate is fully
 $ sudo apt update
 $ sudo apt install nginx
 ```
-##### Step 2:Create .well_known directory
+##### Step 2: Create .well_known directory
 
 ```
 $ mkdir /usr/share/nginx/html/.well_known
