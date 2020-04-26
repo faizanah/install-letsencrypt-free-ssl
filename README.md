@@ -21,7 +21,6 @@
 Let’s Encrypt is a Certificate Authority (CA) that provides an easy way to obtain and install free TLS/SSL certificates, thereby enabling encrypted HTTPS on web servers.
 Currently, the entire process of obtaining and installing a certificate is fully automated on both Apache and Nginx web servers. In this article, I will show you how to set it up for Nginx.
 
-
 ## Create .well_known directory
 
 ```
@@ -32,13 +31,13 @@ $ mkdir /usr/share/nginx/html/.well_known
 
 ##### Step 1: Downloading Let’s Encrypt
 
-Download the letsencrypt client into the `/opt/letsencrypt` folder.
+Clone the letsencrypt client into the `/opt/letsencrypt` folder.
 
 ```
 $ git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt
 ```
 
-##### Step 2: Fix Locale Error
+###### Fix Locale Error
 
 While requesting the certificate, Sometimes I have come across some locale error. To fix that, update the following environment variables:
 
@@ -47,7 +46,7 @@ $ export LC_ALL="en_US.UTF-8"
 $ export LC_CTYPE="en_US.UTF-8"
 ```
 
-##### Step 3: Creating a Let's Encrypt SSL Cert
+##### Step 2: Creating a Let's Encrypt SSL Cert
 
 We can create a cert using the following command. Note that you'll need to change the domain name.
 
@@ -90,7 +89,12 @@ Enable HSTS in by using the option as shown below
 
 ##
 
-# Setup Renewal Cron Job
+# Setting up Auto - Renewal Cron Job
+Create this log file if it doesn’t already exist.
+
+```
+$ touch /var/log/le-renew.log
+```
 
 To enable automatic renewal of your ssl certificate, follow the following steps to create a Cron task that would handle it automatically for you.
 Run this command to open up the crontab:
@@ -108,11 +112,7 @@ Paste following below two line in the end of cron tab.
 
 We have registered a new cron job that will execute the auto renew command every Monday at `4:30 am`, and reload Nginx at `4:35am`.
 The output produced by the command will be piped to a log file located at `/var/log/le-renew.log`.
-Create this log file if it doesn’t already exist.
 
-```
-$ touch /var/log/le-renew.log
-```
 
 Your SSL certificate is now up and running and it gets renewed automatically. You don’t have to keep an eye on it.
 
@@ -125,4 +125,4 @@ Copyright (C) [Faizan AH][1] - All Rights Reserved
 
 - Unauthorized copying of this file, via any medium is strictly prohibited
 - Written by Faizan Ahmad <faizanahmad.herokuapp.com>, April 2020
-  [1]: https://faizanahmad.herokuapp.com
+[1]: https://faizanahmad.herokuapp.com
