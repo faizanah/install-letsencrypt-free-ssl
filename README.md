@@ -93,7 +93,28 @@ Once you have the certificate and chain saved on the server, you can check the N
     Generate a strong DHE parameter using the command below.
     ```
     $ ssl_dhparam /etc/ssl/certs/dhparam.pem;
-
+    ```
+- Enhance cypher suites
+    The cypher suites enable security between your web server and visitors clients by defining how secure communication takes place. The example configuration below is designed for both RSA and ECDSA keys and works as a great starting point for improved security.
+    
+    ```
+    ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA:ECDHE-ECDSA-AES128-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA256;
+    ```
+    
+    By using SSL protocols of SSLv3 or newer, the client tells the web server which cypher suites it supports and the servers chooses one option from that list. The important part of this functionality is that the cyphers on the server are listed in the prefered order from the strongest to the weakest and the cypher order is honoured. This feature can be enforced by adding the following line in your configuration file.
+    
+    ```
+    ssl_prefer_server_ciphers on;
+    ```
+- Redirect unencrypted connections
+    Optionally you can add a redirection from your HTTP connections to the encrypted HTTPS.
+    
+    ```
+    server {
+        listen 80;
+        server_name mysite.com;
+        return 301 https://$server_name$request_uri;
+    }
     ```
 - Adding it all to the configuration
     Create a new configuration file with the command below.
@@ -101,7 +122,9 @@ Once you have the certificate and chain saved on the server, you can check the N
     $ sudo nano /etc/nginx/sites-enabled/mysite.com
     ```
     This example configuration sets up a single site listening for HTTPS connections with the added security features as explained above. 
+    
     * Replace `mysite.com` in the example underneath with your own domain.
+    
     ```
     # HTTPS server
     server {
