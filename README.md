@@ -9,9 +9,10 @@
 
 - [Introduction]
 - [Create .well_known]
-- [Setting up Let’s Encrypt SSL]
 - [Setting up Nginx]
+- [Setting up Let’s Encrypt SSL]
 - [Setting up Auto - Renewal Cron Job]
+- [How to Revoke a Certificate?]
 - [Copyright]
 
 ##
@@ -25,6 +26,14 @@ Currently, the entire process of obtaining and installing a certificate is fully
 
 ```
 $ mkdir /usr/share/nginx/html/.well_known
+```
+## Setting Up Nginx
+
+##### Step 1: Installing Nginx
+
+```
+$ sudo apt update
+$ sudo apt install nginx
 ```
 
 ## Setting up Let’s Encrypt SSL
@@ -56,16 +65,7 @@ We can create a cert using the following command. Note that you'll need to chang
 $ /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /usr/share/nginx/html -d 'mysite.com,www.mysite.com'
 ```
 
-## Setting Up Nginx
-
-##### Step 1: Installing Nginx
-
-```
-$ sudo apt update
-$ sudo apt install nginx
-```
-
-#### Step 2: Enhancing security
+## Enhancing Security
 
 Once you have the certificate and chain saved on the server, you can check the Nginx configuration to further tune the HTTPS connection using the new certificates.
 
@@ -116,6 +116,15 @@ The output produced by the command will be piped to a log file located at `/var/
 
 Your SSL certificate is now up and running and it gets renewed automatically. You don’t have to keep an eye on it.
 
+# How to Revoke a existing certificate?
+If you want to remove a existing certificate from your server it can be revoked using the below given command with the client.
+- `mysite.com` should be replaced with your domain which certificate you want to revoke.
+
+```
+$ sudo certbot revoke --cert-path /etc/letsencrypt/live/mysite.com/cert.pem
+
+```
+The process does not give a confirmation upon completion, but if you perform it again you will get a message that the certificate has already been revoked.
 
 ![picture](/public/divider.png)
 
