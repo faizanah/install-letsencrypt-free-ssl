@@ -8,7 +8,6 @@
 # Table of Contents
 
 - [Introduction]
-- [Create .well_known]
 - [Setting up Nginx]
 - [Setting up Let’s Encrypt SSL]
 - [Setting up Auto - Renewal Cron Job]
@@ -23,11 +22,6 @@
 Let’s Encrypt is a Certificate Authority (CA) that provides an easy way to obtain and install free TLS/SSL certificates, thereby enabling encrypted HTTPS on web servers.
 Currently, the entire process of obtaining and installing a certificate is fully automated on both Apache and Nginx web servers. In this article, I will show you how to set it up for Nginx.
 
-## Create .well_known directory
-
-```
-$ mkdir /usr/share/nginx/html/.well_known
-```
 ## Setting Up Nginx
 
 ##### Step 1: Installing Nginx
@@ -36,7 +30,11 @@ $ mkdir /usr/share/nginx/html/.well_known
 $ sudo apt update
 $ sudo apt install nginx
 ```
+##### Step 2:Create .well_known directory
 
+```
+$ mkdir /usr/share/nginx/html/.well_known
+```
 ## Setting up Let’s Encrypt SSL
 
 ##### Step 1: Downloading Let’s Encrypt
