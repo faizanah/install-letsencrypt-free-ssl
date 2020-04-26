@@ -1,9 +1,13 @@
-![picture](/public/banner.png)
 
-![picture](/public/divider.png)
+<p align="center">
+  <img src="./public/banner.png" alt="Install Free Let’s Encrypt SSL Cert with Nginx" width="250" />
+</p>
 
-# Install Free Let’s Encrypt SSL Cert with Nginx
+<h1 align="center">Install Free Let’s Encrypt SSL Cert with Nginx</h1>
 
+<p align="center">
+  <img src="./public/divider.png" alt="Install Free Let’s Encrypt SSL Cert with Nginx" width="400" />
+</p>
 
 # Table of Contents
 
@@ -27,8 +31,8 @@ Currently, the entire process of obtaining and installing a certificate is fully
 ##### Step 1: Installing Nginx
 
 ```
-$ sudo apt update
-$ sudo apt install nginx
+$ sudo apt-get update
+$ sudo apt-get install certbot python-certbot-nginx
 ```
 ##### Step 2: Create .well_known directory
 
@@ -64,13 +68,20 @@ We can create a cert using the following command. Note that you'll need to chang
 $ /opt/letsencrypt/letsencrypt-auto certonly --webroot -w /usr/share/nginx/html -d 'mysite.com,www.mysite.com'
 ```
 
+##### Step 3: Restart the Nginx Server
+
+After successfully creating the certificate, you will need to restart nginx.
+```
+$ sudo service nginx restart
+```
+
 ## Enhancing Security (Optional)
 
 Once you have the certificate and chain saved on the server, you can check the Nginx configuration to further tune the HTTPS connection using the new certificates.
 
 - Only use secure protocols
 
-  The old insecure `SSLv2` and `SSLv3` should be disabled and never used on modern web servers. This is due to the inherent insecurities in these protocols which is why they have been replaced by the TLS protocols. The example below enables the two most secure TLS versions `1.1` and `1.2`
+  Enables the two most secure TLS versions `1.1` and `1.2`
 
   ```
   ssl_protocols TLSv1.1 TLSv1.2;
@@ -78,15 +89,11 @@ Once you have the certificate and chain saved on the server, you can check the N
 
 - Enable HTTP Strict Transport Security (HSTS)
 
-    The Strict Transport Security safeguards TLS by not allowing any insecure communication with the websites that use it.
-
     Enable HSTS in by using the option as shown below
     ```
     add_header Strict-Transport-Security "max-age=31536000; includeSubdomains";
     ```
 - Diffie-Hellman Ephemeral algorithm
-
-    The Diffie-Hellman algorithm is a way of generating a shared secret between two parties in such a way that the secret cannot be seen by observing the communication.
 
     Generate a strong DHE parameter using the command below.
     ```
@@ -94,14 +101,11 @@ Once you have the certificate and chain saved on the server, you can check the N
     ```
 - Enhance cypher suites
 
-    The cypher suites enable security between your web server and visitors clients by defining how secure communication takes place. The example configuration below is designed for both RSA and ECDSA keys and works as a great starting point for improved security.
+    The cypher suites enable security between your web server and visitors clients by defining how secure communication takes place.
     
     ```
     ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA:ECDHE-ECDSA-AES128-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA256;
-    ```
-    
-    By using SSL protocols of SSLv3 or newer, the client tells the web server which cypher suites it supports and the servers chooses one option from that list. The important part of this functionality is that the cyphers on the server are listed in the prefered order from the strongest to the weakest and the cypher order is honoured. This feature can be enforced by adding the following line in your configuration file.
-    
+    ```    
     ```
     ssl_prefer_server_ciphers on;
     ```
@@ -135,7 +139,7 @@ Once you have the certificate and chain saved on the server, you can check the N
         ssl_certificate_key /etc/letsencrypt/live/mysite.com/privkey.pem;
         ssl_session_cache shared:SSL:10m;
         ssl_session_timeout 5m;
-        ssl_protocols TLSv1.1 TLSv1.2;
+        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
         ssl_prefer_server_ciphers on;
         ssl_dhparam /etc/ssl/certs/dhparam.pem;
         ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA:ECDHE-ECDSA-AES128-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA256;
