@@ -80,15 +80,12 @@ Once you have the certificate and chain saved on the server, you can check the N
 
 - Enable HTTP Strict Transport Security (HSTS)
 
-  The Strict Transport Security safeguards TLS by not allowing any insecure communication with the websites that use it. It was designed to ensure security even in the case of configuration problems and implementation errors. HSTS automatically converting all plaintext links to a secure version. It also disables click-through certificate warnings which are an indicator of an active MITM attack and prevents users from circumventing the warning.
+    The Strict Transport Security safeguards TLS by not allowing any insecure communication with the websites that use it.
 
-  ```
-  add_header Strict-Transport-Security "max-age=31536000; includeSubdomains";
-  ```
-
-Enable HSTS in by using the option as shown below
-```
-```
+    Enable HSTS in by using the option as shown below
+    ```
+    add_header Strict-Transport-Security "max-age=31536000; includeSubdomains";
+    ```
 - Diffie-Hellman Ephemeral algorithm
 
     The Diffie-Hellman algorithm is a way of generating a shared secret between two parties in such a way that the secret cannot be seen by observing the communication.
