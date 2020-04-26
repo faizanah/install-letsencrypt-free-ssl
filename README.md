@@ -131,7 +131,7 @@ The process does not give a confirmation upon completion, but if you perform it 
 You can evaluate the server encryption performance with [Qualys SSL Labs test site](https://www.ssllabs.com/ssltest/index.html). Enter your domain name into the text field and click the Submit button. The test will take a moment, but when completed it provides some useful information on different areas of your server encryption security as well as an overall rating.
 
 
-![picture](/public/ssl_report.png)
+![picture](/public/ssl_report.PNG)
 
 ![picture](/public/divider.png)
 
