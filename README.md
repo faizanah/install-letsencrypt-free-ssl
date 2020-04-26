@@ -1,7 +1,9 @@
 ![picture](/public/banner.jpg)
-# Install Free Let’s Encrypt SSL Cert with Nginx
 
 ![picture](/public/divider.png)
+
+# Install Free Let’s Encrypt SSL Cert with Nginx
+
 
 # Table of Contents
 
@@ -19,11 +21,6 @@
 Let’s Encrypt is a Certificate Authority (CA) that provides an easy way to obtain and install free TLS/SSL certificates, thereby enabling encrypted HTTPS on web servers.
 Currently, the entire process of obtaining and installing a certificate is fully automated on both Apache and Nginx web servers. In this article, I will show you how to set it up for Nginx.
 
-##
-
-![formbuilder](/public/secure-env.gif)
-
-##
 
 ## Create .well_known directory
 
@@ -93,8 +90,6 @@ Enable HSTS in by using the option as shown below
 
 ##
 
-![picture](/public/encrypt.PNG)
-
 # Setup Renewal Cron Job
 
 To enable automatic renewal of your ssl certificate, follow the following steps to create a Cron task that would handle it automatically for you.
@@ -121,9 +116,6 @@ $ touch /var/log/le-renew.log
 
 Your SSL certificate is now up and running and it gets renewed automatically. You don’t have to keep an eye on it.
 
-##
-
-![picture](/public/decrypt.PNG)
 
 ![picture](/public/divider.png)
 
@@ -133,5 +125,4 @@ Copyright (C) [Faizan AH][1] - All Rights Reserved
 
 - Unauthorized copying of this file, via any medium is strictly prohibited
 - Written by Faizan Ahmad <faizanahmad.herokuapp.com>, April 2020
-  [![](https://www.aiondigital.com/wp-content/uploads/2018/07/Aion_white-1024x241.png)](https://aiondigital.com)
   [1]: https://faizanahmad.herokuapp.com
