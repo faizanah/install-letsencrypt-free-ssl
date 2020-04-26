@@ -90,7 +90,8 @@ Enable HSTS in by using the option as shown below
 ```
 ```
 - Diffie-Hellman Ephemeral algorithm
-  The Diffie-Hellman algorithm is a way of generating a shared secret between two parties in such a way that the secret cannot be seen by observing the communication.
+
+    The Diffie-Hellman algorithm is a way of generating a shared secret between two parties in such a way that the secret cannot be seen by observing the communication.
 
     Generate a strong DHE parameter using the command below.
     ```
@@ -130,6 +131,12 @@ Enable HSTS in by using the option as shown below
         server_name mysite.com;
         return 301 https://$server_name$request_uri;
     }
+    ```
+    Then save the file and exit the editor.
+
+    To have the changes take effect, you will need to restart nginx.
+    ```
+    $ sudo service nginx restart
     ```
 ##
 
