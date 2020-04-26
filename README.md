@@ -13,6 +13,7 @@
 - [Setting up Let’s Encrypt SSL]
 - [Setting up Auto - Renewal Cron Job]
 - [How to Revoke a Certificate?]
+- [Qualys SSL Labs Test] 
 - [Copyright]
 
 ##
@@ -125,6 +126,12 @@ $ sudo certbot revoke --cert-path /etc/letsencrypt/live/mysite.com/cert.pem
 
 ```
 The process does not give a confirmation upon completion, but if you perform it again you will get a message that the certificate has already been revoked.
+
+# Qualys SSL Labs Test
+You can evaluate the server encryption performance with [Qualys SSL Labs test site](https://www.ssllabs.com/ssltest/index.html). Enter your domain name into the text field and click the Submit button. The test will take a moment, but when completed it provides some useful information on different areas of your server encryption security as well as an overall rating.
+
+
+![picture](/public/ssl_report.png)
 
 ![picture](/public/divider.png)
 
