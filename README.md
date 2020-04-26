@@ -107,8 +107,9 @@ Once you have the certificate and chain saved on the server, you can check the N
     ssl_prefer_server_ciphers on;
     ```
 - Redirect unencrypted connections
-    Optionally you can add a redirection from your HTTP connections to the encrypted HTTPS.
     
+    Optionally you can add a redirection from your HTTP connections to the encrypted HTTPS.
+
     ```
     server {
         listen 80;
