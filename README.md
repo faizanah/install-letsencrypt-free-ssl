@@ -1,4 +1,4 @@
-![picture](/public/banner.jpg)
+![picture](/public/banner.png)
 
 ![picture](/public/divider.png)
 
